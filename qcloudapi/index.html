@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<meta name="viewport"
+	content="width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta name="author" content="blackturtle" />
+<title>敏感系数屏蔽测试</title>
+<style type="text/css">
+.upfilebox {
+	position: relative;
+}
+
+body {
+	margin: 0;
+}
+
+a {
+	display: block;
+	text-decoration: none;
+	color: rgba(22, 155, 213, 0.55);
+}
+
+.upfilebox input {
+	top: 5px;
+	left: 2%;
+	float: left;
+	line-height: 0px;
+	width: 90%;
+	position: absolute;
+	z-index: 9;
+	opacity: 0.6;
+}
+
+button {
+	border-style: none;
+}
+
+textarea {
+	padding: 0;
+}
+
+textarea:focus {
+	outline-style: none;
+	box-shadow: 1px 2px 5px #888888;
+}
+
+.header {
+	height: 3rem;
+	margin: 0;
+}
+
+.back2index {
+	float: left;
+	margin-top: 0.8rem;
+	margin-left: 1.2rem;
+	font-size: 20px;
+}
+
+.my_publish {
+	float: right;
+	margin-top: 0.8rem;
+	margin-right: 1.2rem;
+	font-size: 20px;
+}
+
+.middle {
+	margin-top: 1.6rem;
+	margin-left: 0.6rem;
+	margin-right: 0.6rem;
+}
+
+.nameOf {
+	height: 4.1rem;
+}
+
+.middle_left {
+	height: 2.1rem;
+	width: 100%;
+	float: left;
+	color: #169BD5;
+	font-size: 1.2rem;
+}
+
+.middle_left span {
+	display: block;
+	font-size: 1rem;
+}
+
+.middle_right {
+	width: 95%;
+	float: left;
+}
+
+.name_textarea {
+	float:left;
+	width: 100%;
+	height: 1.4rem;
+	font-size: 1.2rem;
+}
+
+.name_button {
+	width: 100%;
+	height: 1.8rem;
+	font-size: 1rem;
+	margin-top: 0.5rem;
+	background-color: #169BD5;
+	color: white;
+	border-radius: 6px;
+}
+
+.basic_description {
+	margin-top: 0.7rem;
+	height: 4.1rem;
+}
+
+.description {
+	height: 4.1rem;
+}
+
+.description textarea {
+	width: 100%;
+	height: 100%;
+	font-size: 1.2rem;
+}
+
+.other {
+	height: 6rem;
+	margin-top: 0.7rem;
+}
+
+.other_description {
+	height: 23rem;
+}
+
+.other_description textarea {
+	height: 100%;
+	width: 100%;
+	font-size: 1.2rem;
+}
+
+.contact {
+	margin-top: 1.5rem;
+	text-align: center;
+}
+
+.contact>label {
+	color: #999999;
+}
+
+.phone_contact {
+	margin-top: 0.7rem;
+	height: 1.8rem;
+}
+
+.contact_left {
+	width: 65%;
+	float: left;
+	font-size: 1.2rem;
+	color: #169BD5;
+}
+
+.contact_right {
+	width: 65%;
+	float: left;
+	font-size: 1.2rem;
+	height: 1.4rem;
+}
+
+.weichat_contact {
+	margin-top: 0.7rem;
+	height: 1.8rem;
+}
+
+.bottom_button {
+	margin-top: 2rem;
+	width: 16rem;
+	height: 1.8rem;
+	font-size: 1rem;
+	background-color: #169BD5;
+	color: white;
+	border-radius: 6px;
+}
+
+.bottom_explanation {
+	display: block;
+	color: #999999;
+}
+</style>
+
+<!--验证所有空填满-->
+<script type="text/javascript">
+	function LTrim(str) {
+		var i;
+		for (i = 0; i < str.length; i++) {
+			if (str.charAt(i) != " ")
+				break;
+		}
+		str = str.substring(i, str.length);
+		return str;
+	}
+	// 去掉字符串的尾空格(右空格) 
+	function RTrim(str) {
+		var i;
+		for (i = str.length - 1; i >= 0; i--) {
+			if (str.charAt(i) != " ")
+				break;
+		}
+		str = str.substring(0, i + 1);
+		return str;
+	}
+	// 去掉字符串的头尾空格(左右空格) 
+	function Trim(str) {
+		return LTrim(RTrim(str));
+	}
+	//检查空
+	function showDia(field, alerttxt) {
+		with (field) {
+			value = Trim(value);
+			if (value == null || value == "") {
+				alert(alerttxt);
+				return false;
+			} else {
+				return true;
+			}
+		}
+	}
+	//检查超字数
+	function showFull(field, alerttxt, num) {
+		with (field) {
+			value = Trim(value);
+			if (value.length > num) {
+				alert(alerttxt);
+				return false;
+			} else {
+				return true;
+			}
+		}
+	}
+
+	//正则匹配
+	function showPreg(field, alerttxt) {
+		with (field) {
+			var regu = "/\d+/";
+			var re = new RegExp(regu);
+			value = Trim(value);
+			if (re.test(value) == true) {
+				return true;
+			} else {
+				alert(alerttxt);
+				return false;
+			}
+		}	
+	}
+
+	function showMonth(field, alerttxt){with (field) {
+			value = Trim(value);
+			if (value>=1 && value<=12) {
+				return true;
+			} else {
+				alert(alerttxt);
+				return false;
+			}
+		}	
+	}
+	
+	
+	function showDay(field, alerttxt){with (field) {
+			value = Trim(value);
+			if (value>=1 && value<=31) {
+				return true;
+			} else {
+				alert(alerttxt);
+				return false;
+			}
+		}	
+	}
+	
+	function showTime(field, alerttxt){with (field) {
+			value = Trim(value);
+			if (value.localeCompare("am")==0 || value.localeCompare("pm")==0) {
+				return true;
+			} else {
+				alert(alerttxt);
+				alert(value.localeCompare("am"));
+				return false;
+			}
+		}	
+	}
+	
+	
+	function check_form(thisform) {
+		with (thisform) {
+			if (showDia(info, "信息必须填写哦") == false) {
+				info.focus();
+				return false;
+			}else if(showMonth(month,"请填写正确的月份")==false){
+				month.focus();
+				return false;
+			}else if(showDay(day,"请填写正确的日期")==false){
+				day.focus();
+				return false;
+			}else if(showTime(time,"请选择正确的时段")==false){
+				day.focus();
+				return false;
+			}else
+				return true;
+		}
+	}
+</script>
+</head>
+<body>
+
+	
+	<form class="middle" action="./point.php"
+		onsubmit="" method="post">
+
+		
+		<div class="other">
+			<label class="middle_left">输入敏感词（色情/暴力/反动）</label>
+			<div class="middle_right other_description">
+				<textarea name="content"></textarea>
+			</div>
+		</div>
+
+		<!--分割线-->
+		<hr color=#797979 size=1
+			style="clear: both; margin: 1rem 1rem 0rem 1rem" />
+			<button	 class="bottom_button" type="submit">提交信息</button>
+		
+	</form>
+</body>
+</html>
