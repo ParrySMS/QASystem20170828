@@ -19,7 +19,7 @@ require "../controller/openid.php"; //操作类
 require "../controller/log.php"; //log类
 require "../controller/user.php";//user表操作模块
 require "../model/medoo.php";//数据库框架
-require "../model/Token.class.php";//接口数据类
+require "../model/Token.class.php";
 
 date_default_timezone_set('Asia/Shanghai');
 $database = new medoo(array("database_name" => DATABASE_NAME));
