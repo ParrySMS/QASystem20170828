@@ -4,8 +4,8 @@ error_reporting(E_ALL ^ E_NOTICE);
 require_once './src/QcloudApi/QcloudApi.php';
 
 $config = array(
-    'SecretId'       => 'AKIDkcaO1VDwtfGf3TROdljXAct0viKlvg8Q',
-    'SecretKey'      => 'IRT7cw8GDza0HdswoV0KlCTbYKvPipoc',
+    'SecretId'       => 'yourSecretId',
+    'SecretKey'      => 'yourSecretKey',
     'RequestMethod'  => 'POST',
     'DefaultRegion'  => 'gz');
 
